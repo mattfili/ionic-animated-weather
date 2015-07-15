@@ -4,7 +4,7 @@
 <div class="list card">
 
   <div class="item item-avatar">
-  <img src="{{img}}" height='200' width='200'/> 
+  <img src="{{data.img}}" height='200' width='200'/> 
     <h2>{{city}}</h2>
     <p>{{date}}</p>
   </div>
@@ -12,9 +12,9 @@
 
 
   <div class="item item-body">
-  	<img src="{{img}}" height='200' width='200'/> 
-    <p>
-      {{forecast.summary}}
+  	<img src="{{data.img}}" height='200' width='200' class='weathericon'/> 
+    <p id="dailysummary">
+      {{data.daily.summary}}
     </p>
 
   </div>
