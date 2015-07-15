@@ -15,6 +15,8 @@
   	<img src="{{data.img}}" height='200' width='200' class='weathericon'/> 
     <p id="dailysummary">
       {{data.daily.summary}}
+    <p> It's {{data.currently.summary}} and the temperature is {{data.currently.apparentTemperature}} degrees</p>
+    <p> There is a {{data.currently.precipProbability}}% of rain and the nearest storm is {{data.currently.nearestStormDistance}} miles away</p>
     </p>
 
   </div>

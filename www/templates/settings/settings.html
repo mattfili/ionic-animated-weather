@@ -1,0 +1,19 @@
+<ion-view view-title="Settings">
+  <ion-content>
+  <ul class='list'>
+  	<div class" item item-divider">
+  		Precision
+  	</div>
+  	<div class="item range">
+  		<i class="icon ion-ios-sunny-outline"></i>
+  		<input type="range" name="volume" min="0" max="100" value="3" ng-model='$parent.precision' ng-change="precisionChanged()">
+  		<i class="icon ion-ios-sunny"></i>
+	</div>
+
+    <ion-list>
+      <ion-radio ng-model="$parent.scale" ng-value="'F'"> Farenheight </ion-radio>
+      <ion-radio ng-model="$parent.scale" ng-value="'C'"> Celcius </ion-radio>
+      <ion-radio ng-model="$parent.scale" ng-value="'K'"> Kelvin </ion-radio>
+    </ion-list>
+  </ion-content>
+</ion-view>

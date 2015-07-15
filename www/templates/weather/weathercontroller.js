@@ -34,6 +34,8 @@ angular
 
 	$scope.forecast = $scope.data.daily.data
 
+	
+
 
 	
 

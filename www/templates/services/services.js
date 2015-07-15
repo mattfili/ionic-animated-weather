@@ -5,9 +5,7 @@ angular
 .service('WeatherData', function() {
 	this.currently = {};
 	this.daily = {};
-
 	this.formatdate = {};
-
 	this.img = {};
 
 	this.dataPush = function (current, daily) {
@@ -19,5 +17,23 @@ angular
 		this.img = icon
 	}
 
+})
 
+.factory('Settings', function(){
+	return {
+		scale: 'F',
+		precision: 1
+	}
+})
+
+.factory('LocalStorage', function () {
+	return {
+		storeScale: function(data) {
+			localStorage.scale = data
+		},
+		storePrecision: function(data) {
+			localStorage.precision = data
+		}
+
+	}
 })

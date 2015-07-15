@@ -62,12 +62,13 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
-    .state('app.playlists', {
-      url: "/playlists",
+    .state('app.settings', {
+      url: "/settings",
       views: {
         'menuContent': {
-          templateUrl: "templates/playlists.html",
-          controller: 'PlaylistsCtrl'
+          templateUrl: "templates/settings/settings.html",
+          controller: 'settings',
+          controllerAs: 'settings'
         }
       }
     })
@@ -82,7 +83,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/search');
 })
 
 .factory('Weather', function (WeatherData, $http, $stateParams) {
@@ -146,6 +147,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
           WeatherData.imgPush(icon) 
       })
+
+
     }
 
   }
