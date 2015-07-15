@@ -1,0 +1,39 @@
+<ion-view view-title="Current Weather">
+  <ion-content>
+
+<div class="list card">
+
+  <div class="item item-avatar">
+  <img src="{{img}}" height='200' width='200'/> 
+    <h2>{{city}}</h2>
+    <p>{{date}}</p>
+  </div>
+
+
+
+  <div class="item item-body">
+  	<img src="{{img}}" height='200' width='200'/> 
+    <p>
+      {{forecast.summary}}
+    </p>
+
+  </div>
+
+  <div class="item tabs tabs-secondary tabs-icon-left">
+    <a class="tab-item" href="#">
+      <i class="ion-ios-flower-outline"></i>
+      Detail
+    </a>
+    <a class="tab-item" ng-click="openModal()">
+      <i class="ion-ios-calendar-outline"></i>
+      Forecast
+    </a>
+  </div>
+
+</div>
+
+    <ion-nav-view name="modal"></ion-nav-view>
+
+
+  </ion-content>
+</ion-view>

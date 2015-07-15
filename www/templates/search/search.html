@@ -8,7 +8,13 @@
   		</label>
 	</div>
 	<ion-list class="list-inset" can-swipe="true">
-		<ion-item ng-repeat="names in cities"> {{names.formatted_address}} </ion item> 
+	 <div class="item item-divider" ng-hide="display"> Which City did you mean? </div>
+		<ion-item ng-repeat="names in cities" ng-animate="{enter: 'example-repeat-enter', leave: 'example-repeat-leave', move: 'example-repeat-move'}"> {{names.formatted_address}} </ion item> 
+		<ion-option-button class="button-positive" ui-sref="app.weather({
+		city: names.formatted_address,
+		lat: names.geometry.location.lat,
+		long: names.geometry.location.lng
+		})"> This City</ion-option-button>
 	</ion-list>
   </ion-content>
 </ion-view>
