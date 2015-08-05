@@ -1,2 +1,2 @@
 # weather-garbage
-fucking weather
+ionic weather app with animation
