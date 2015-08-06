@@ -15,12 +15,12 @@ angular
 		this.hourly = hourly;
 	}
 
-	this.imgPush = function (icon) {
-		this.img = icon;
-	}
-
 	this.colorPush = function (color, i) {
 		this.hourly.data[i].color = color
+	}
+
+	this.iconPush = function (icon, i) {
+		this.hourly.data[i].icon = icon
 	}
 
 })

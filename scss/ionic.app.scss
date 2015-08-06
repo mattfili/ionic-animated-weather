@@ -1,12 +1,3 @@
-.degrees {
-  font-size: 2.7rem;
-  font-weight: 200;
-  color: black;
-  line-height: 1;
-
-  &:after { content: '\00b0'; }
-}
-
 $night: #071826;  
 $earlymorning: #071940; 
 $sunrise: #FA6551; 
@@ -15,3 +6,145 @@ $day: #9DDEFF;
 $afternoon: #2A91CF; 
 $sunset: #FA6A67; 
 $evening: #133778;
+
+$animation-easing: cubic-bezier(0.77, 0, 0.175, 1);
+
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+* {
+  box-sizing: border-box;
+  position: relative;
+}
+
+$device-height: 900px;
+
+
+.device {
+  position: absolute;
+  height: $device-height;
+  width: 100%;
+
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      z-index: 2;
+    }
+
+  section {
+    height: calc(100% - 50px);
+    width: 100%;
+    overflow: hidden;
+  }
+}
+
+
+
+.weather {
+  @extend %transition;
+  height: percentage(1/25);
+  overflow: hidden;
+  
+  &:hover, .device section:not(:hover) &:first-child {
+    height: 50%;
+
+    .icon {    
+      transform: translateY(0);
+      z-index: 1;
+    }
+    
+    + .weather .icon {
+      transform: translateY(-$device-height / 2);
+    }
+
+    ~ .weather .icon {
+      z-index: -1;
+    }
+   
+    
+    &:not(:first-child) .data {
+      animation-name: slide-up;
+      animation-delay: 0.10s;
+      animation-duration: 0.8s;
+      animation-fill-mode: backwards;
+      animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+  }
+
+  .content {
+    right: 0;
+    position: absolute;
+    width: 40%;
+    color: white;
+
+    @at-root & {
+      font-family: 'Lato', sans-serif;
+    }
+
+  }
+
+  h2 {
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0px;
+    font-weight: 700;
+    font-family: 'Lato'
+  }
+
+  h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;    
+    font-weight: 400;
+    color: white;
+    font-family: 'Lato'
+  }
+
+  .degrees {
+    font-size: 2.7rem;
+    font-weight: 200;
+    color: black;
+    line-height: 1;
+
+    &:after { 
+      content: '\00b0'; 
+    }
+  }
+}
+
+.icon {
+  z-index: -1;
+  @extend %transition;
+  position: relative;
+  top: 5%;
+  left: 10%;
+  width: percentage(1/2);
+  height: 50px;
+  transform: translateY($device-height/ 20);
+
+    img {
+      height: auto;
+      width: 30%;
+      position: relative
+    }
+}
+
+
+
+
+
+
+
+
+
+%transition {
+  transition: all 0.7s ease-in-out;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(150%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+

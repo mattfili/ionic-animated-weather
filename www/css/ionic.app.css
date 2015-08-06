@@ -1,7 +1,86 @@
-.degrees {
-  font-size: 2.7rem;
-  font-weight: 200;
-  color: black;
-  line-height: 1; }
-  .degrees:after {
-    content: '\00b0'; }
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+* {
+  box-sizing: border-box;
+  position: relative; }
+
+.device {
+  position: absolute;
+  height: 900px;
+  width: 100%; }
+  .device:before, .device:after {
+    content: '';
+    position: absolute;
+    z-index: 2; }
+  .device section {
+    height: calc(100% - 50px);
+    width: 100%;
+    overflow: hidden; }
+
+.weather {
+  height: 4%;
+  overflow: hidden; }
+  .weather:hover, .device section:not(:hover) .weather:first-child {
+    height: 50%; }
+    .weather:hover .icon, .device section:not(:hover) .weather:first-child .icon {
+      transform: translateY(0);
+      z-index: 1; }
+    .weather:hover + .weather .icon, .device section:not(:hover) .weather:first-child + .weather .icon {
+      transform: translateY(-450px); }
+    .weather:hover ~ .weather .icon, .device section:not(:hover) .weather:first-child ~ .weather .icon {
+      z-index: -1; }
+    .weather:hover:not(:first-child) .data, .device section:not(:hover) .weather:first-child:not(:first-child) .data {
+      animation-name: slide-up;
+      animation-delay: 0.1s;
+      animation-duration: 0.8s;
+      animation-fill-mode: backwards;
+      animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1); }
+  .weather .content {
+    right: 0;
+    position: absolute;
+    width: 40%;
+    color: white;
+    @at-root {
+      font-family: 'Lato', sans-serif; }
+ }
+  .weather h2 {
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0px;
+    font-weight: 700;
+    font-family: 'Lato'; }
+  .weather h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+    color: white;
+    font-family: 'Lato'; }
+  .weather .degrees {
+    font-size: 2.7rem;
+    font-weight: 200;
+    color: black;
+    line-height: 1; }
+    .weather .degrees:after {
+      content: '\00b0'; }
+
+.icon {
+  z-index: -1;
+  position: relative;
+  top: 5%;
+  left: 10%;
+  width: 50%;
+  height: 50px;
+  transform: translateY(45px); }
+  .icon img {
+    height: auto;
+    width: 30%;
+    position: relative; }
+
+.weather, .icon {
+  transition: all 0.7s ease-in-out; }
+
+@keyframes slide-up {
+  from {
+    transform: translateY(150%); }
+
+  to {
+    transform: translateY(0); } }
