@@ -3,7 +3,7 @@
 
   <div class="device">
       <section>
-        <div class="repeat-item" ng-repeat="data in data.hourly.data | limitTo:25" ng-style="{color: 'red'}">
+        <div class="repeat-item" ng-repeat="data in data.hourly.data | limitTo:25" ng-style="{'background-color': '{{data.color}}' }">
           <div class="timeBody" ng-model="timeColor">
               <div class="icon">
                 <i class="{{data.icon}}"></i>

@@ -3,7 +3,15 @@
   font-weight: 200;
   color: black;
   line-height: 1;
-  
+
   &:after { content: '\00b0'; }
 }
 
+$night: #071826;  
+$earlymorning: #071940; 
+$sunrise: #FA6551; 
+$morning: #2A91CF; 
+$day: #9DDEFF; 
+$afternoon: #2A91CF; 
+$sunset: #FA6A67; 
+$evening: #133778;

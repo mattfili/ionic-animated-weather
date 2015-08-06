@@ -148,18 +148,26 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
             var colorTime = data.hourly.data
 
-          for (var i=0; i < colorTime.length; i++) {
-            var unUnixDate = new Date(colorTime[i].time *1000)
-            var formattedDate = unUnixDate.getHours();
+            for (var i=0; i < colorTime.length; i++) {
+              var unUnixDate = new Date(colorTime[i].time *1000)
+              var formattedDate = unUnixDate.getHours();
 
-            if (formattedDate <= 23 && formattedDate > 11) {
-                WeatherData.colorPush('red', i);
-              } else if (formattedDate < 11){
-                WeatherData.colorPush('green', i);
-              } else if (formattedDate <= 23 && formattedDate > 11){
-                WeatherData.colorPush('yellow');
-              } else if (formattedDate <= 23 && formattedDate > 11){
-                WeatherData.colorPush('orange');
+            if (formattedDate >= 0 && formattedDate <=2 || formattedDate === 23) {
+                WeatherData.colorPush('$night', i);
+              } else if (formattedDate >=3 && formattedDate <= 5){
+                WeatherData.colorPush('$earlymorning', i);
+              } else if (formattedDate === 6 ){
+                WeatherData.colorPush('$sunrise', i);
+              } else if (formattedDate >= 7 && formattedDate <=11 ){
+                WeatherData.colorPush('$morning', i);
+              } else if (formattedDate >= 12 && formattedDate <= 15){
+                WeatherData.colorPush('$day', i);
+              } else if (formattedDate >= 15 && formattedDate <= 18){
+                WeatherData.colorPush('$afternoon', i);
+              } else if (formattedDate === 19){
+                WeatherData.colorPush('$sunset', i);
+              } else if (formattedDate >= 20 && formattedDate > 22){
+                WeatherData.colorPush('$evening', i);
               } 
           }
 
