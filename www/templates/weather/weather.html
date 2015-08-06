@@ -4,7 +4,7 @@
 <div class="box">
   <div class="device">
       <section>
-        <div class="weather" ng-repeat="data in data.hourly.data | limitTo:25" ng-style="{'background-color': '{{data.color}}' }">
+        <div class="weather" ng-repeat="data in data.hourly.data | limitTo:15" ng-style="{'background-color': '{{data.color}}' }">
             <div class="icon">
               <figure>
                 <img src="../../lib/animated-climacons/climacons/svg-css/{{data.icon}}" ng-class="data.icon">
