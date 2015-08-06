@@ -47,7 +47,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     views: {
       'menuContent': {
         templateUrl: "templates/weather/weather.html",
-        controller: 'WeatherCtrl'
+        controller: 'WeatherCtrl',
+        controllerAs: 'WeatherCtrl'
       }
     }
   })
@@ -84,74 +85,119 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/search');
-})
+  })
 
-.factory('Weather', function (WeatherData, $http, $stateParams) {
-  return {
+  .factory('Weather', function (WeatherData, $http, $stateParams) {
+    return {
 
-    date: function() {
-      var day = new Date().toDateString().substring(0, 3)
-      var month = new Date().toDateString().substring(3)
-      if (day === 'Tue') {
-        day = 'Tuesday'
-      } else if (day ==='Wed') {
-        day = 'Wednesday'
-      } else if (day ==='Thur') {
-        day = 'Thursday'
-      } else if (day ==='Fri') {
-        day = 'Friday'
-      } else if (day ==='Sat') {
-        day = 'Saturday'
-      } else if (day ==='Sun') {
-        day = 'Sunday'
-      } else if (day ==='Mon') {
-        day = 'Monday'
-      }
-      var datemonth = day + ',' + month
+      date: function() {
+        var day = new Date().toDateString().substring(0, 3)
+        var month = new Date().toDateString().substring(3)
+        if (day === 'Tue') {
+          day = 'Tuesday'
+        } else if (day ==='Wed') {
+          day = 'Wednesday'
+        } else if (day ==='Thur') {
+          day = 'Thursday'
+        } else if (day ==='Fri') {
+          day = 'Friday'
+        } else if (day ==='Sat') {
+          day = 'Saturday'
+        } else if (day ==='Sun') {
+          day = 'Sunday'
+        } else if (day ==='Mon') {
+          day = 'Monday'
+        }
+        var datemonth = day + ',' + month
 
-      WeatherData.formatdate = datemonth
-      console.log(WeatherData.formatdate)
-    },
+        WeatherData.formatdate = datemonth
+      },
 
-    getWeather: function() {
-      $http
-        .get('/api/forecast/' + $stateParams.lat + ',' + $stateParams.long)
-        .success(function (data){
- 
-          WeatherData.dataPush(data.currently, data.daily) 
-          var icon = data.currently.icon
+      getWeather: function() {
+        $http
+          .get('/api/forecast/' + $stateParams.lat + ',' + $stateParams.long)
+          .success(function (data){
+   
+            WeatherData.dataPush(data.currently, data.daily, data.hourly) 
+            
+            var icon = data.currently.icon
 
-          console.log(data.currently.icon)
+            if (icon  === 'clear-day') {
+              icon = 'http://media.giphy.com/media/JPumw7ImWiego/giphy.gif'
+            } else if (icon ==='clear-night') {
+              icon = 'https://media4.giphy.com/media/aprk75CTbT2IU/200.gif'
+            } else if (icon ==='rain') {
+              icon = 'https://media3.giphy.com/media/5f1tNZVLs2Lny/200.gif'
+            } else if (icon ==='snow') {
+              icon = 'https://media2.giphy.com/media/BDucPOizdZ5AI/200.gif'
+            } else if (icon ==='sleet') {
+              icon = 'https://media0.giphy.com/media/jrAjSZWmHVcaY/200.gif'
+            } else if (icon ==='wind') {
+              icon = 'https://media3.giphy.com/media/pqmyGJ2R8eBRC/200.gif'
+            } else if (icon ==='fog') {
+              icon = 'https://media3.giphy.com/media/10v3lzFmbemHv2/200_s.gif'
+            } else if (icon ==='cloudy') {
+              icon = 'https://media3.giphy.com/media/p5683tgqzyl1e/200_s.gif'
+            } else if (icon ==='partly-cloudy-day') {
+              icon = 'https://media3.giphy.com/media/DJsg1IjMronNm/200.gif'
+            } else if (icon ==='partly-cloudy-night') {
+              icon = 'https://media1.giphy.com/media/D7dgAXOv9yRLG/200.gif'
+            }
 
-          if (icon  === 'clear-day') {
-            icon = 'http://media.giphy.com/media/JPumw7ImWiego/giphy.gif'
-          } else if (icon ==='clear-night') {
-            icon = 'https://media4.giphy.com/media/aprk75CTbT2IU/200.gif'
-          } else if (icon ==='rain') {
-            icon = 'https://media3.giphy.com/media/5f1tNZVLs2Lny/200.gif'
-          } else if (icon ==='snow') {
-            icon = 'https://media2.giphy.com/media/BDucPOizdZ5AI/200.gif'
-          } else if (icon ==='sleet') {
-            icon = 'https://media0.giphy.com/media/jrAjSZWmHVcaY/200.gif'
-          } else if (icon ==='wind') {
-            icon = 'https://media3.giphy.com/media/pqmyGJ2R8eBRC/200.gif'
-          } else if (icon ==='fog') {
-            icon = 'https://media3.giphy.com/media/10v3lzFmbemHv2/200_s.gif'
-          } else if (icon ==='cloudy') {
-            icon = 'https://media3.giphy.com/media/p5683tgqzyl1e/200_s.gif'
-          } else if (icon ==='partly-cloudy-day') {
-            icon = 'https://media3.giphy.com/media/DJsg1IjMronNm/200.gif'
-          } else if (icon ==='partly-cloudy-night') {
-            icon = 'https://media1.giphy.com/media/D7dgAXOv9yRLG/200.gif'
+            WeatherData.imgPush(icon) 
+
+            var colorTime = data.hourly.data
+
+          for (var i=0; i < colorTime.length; i++) {
+            var unUnixDate = new Date(colorTime[i].time *1000)
+            var formattedDate = unUnixDate.getHours();
+
+            if (formattedDate <= 23 && formattedDate > 11) {
+                WeatherData.colorPush('red', i);
+              } else if (formattedDate < 11){
+                WeatherData.colorPush('green', i);
+              } else if (formattedDate <= 23 && formattedDate > 11){
+                WeatherData.colorPush('yellow');
+              } else if (formattedDate <= 23 && formattedDate > 11){
+                WeatherData.colorPush('orange');
+              } 
           }
 
-          WeatherData.imgPush(icon) 
-      })
+        })
 
+
+      }
 
     }
+  })
 
-  }
-})
+  .filter('Time', function () {
+    return function(input) {
+        var unUnixDate = new Date(input*1000)
+        var formattedDate = unUnixDate.getHours();
+          if (formattedDate <= 23 && formattedDate >= 13) {
+            var output = formattedDate-12 + 'pm'
+          } else if (formattedDate === 0){
+            var output = formattedDate+12 + 'am'
+          } else if (formattedDate === 12){
+            var output = formattedDate + 'pm'
+          } else {
+            var output = formattedDate + 'am'
+          }
+          return output;
+        }
+   })
+
+   .filter('Percent', function () {
+    return function(input) {
+        var output = input * 100
+        return output + '%'
+        console.log(output)
+    }
+  })
+
+
+
+
 
 

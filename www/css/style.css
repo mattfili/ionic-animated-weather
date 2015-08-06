@@ -1,3 +1,5 @@
+@import url('ionic.app.css');
+
 .example-repeat-enter,
 .example-repeat-leave,
 .example-repeat-move {
@@ -28,14 +30,3 @@
  
 .example-repeat-move { }
 .example-repeat-move.example-repeat-move-active { }
-
-img.weathericon {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-div.list.card {
-  display: block;
-  padding: auto -50%;
-}

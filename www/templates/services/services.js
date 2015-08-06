@@ -4,17 +4,23 @@ angular
 
 .service('WeatherData', function() {
 	this.currently = {};
+	this.hourly = {};
 	this.daily = {};
 	this.formatdate = {};
 	this.img = {};
 
-	this.dataPush = function (current, daily) {
-		this.currently = current
-		this.daily = daily
+	this.dataPush = function (current, daily, hourly) {
+		this.currently = current;
+		this.daily = daily;
+		this.hourly = hourly;
 	}
 
 	this.imgPush = function (icon) {
-		this.img = icon
+		this.img = icon;
+	}
+
+	this.colorPush = function (color, i) {
+		this.hourly.data[i].color = color
 	}
 
 })

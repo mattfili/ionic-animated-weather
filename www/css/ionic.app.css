@@ -2,8 +2,6 @@
   font-size: 2.7rem;
   font-weight: 200;
   color: black;
-  line-height: 1;
-  
-  &:after { content: '\00b0'; }
-}
-
+  line-height: 1; }
+  .degrees:after {
+    content: '\00b0'; }

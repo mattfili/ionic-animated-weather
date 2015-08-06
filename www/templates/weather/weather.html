@@ -1,40 +1,98 @@
 <ion-view view-title="Current Weather">
   <ion-content>
 
-<div class="list card">
-
-  <div class="item item-avatar">
-  <img src="{{data.img}}" height='200' width='200'/> 
-    <h2>{{city}}</h2>
-    <p>{{date}}</p>
+  <div class="device">
+      <section>
+        <div class="repeat-item" ng-repeat="data in data.hourly.data | limitTo:25" ng-style="{color: 'red'}">
+          <div class="timeBody" ng-model="timeColor">
+              <div class="icon">
+                <i class="{{data.icon}}"></i>
+              </div>
+              <div class="content">
+                <h2>{{data.time | Time}}</h3>
+                <div class="degrees"> {{data.apparentTemperature | limitTo:2}}</div> 
+                <h3>{{data.precipProbability | Percent}} </h3>
+               </div>
+          </div>
+        </div>
+      </section>
   </div>
 
 
 
-  <div class="item item-body">
-  	<img src="{{data.img}}" height='200' width='200' class='weathericon'/> 
-    <p id="dailysummary">
-      {{data.daily.summary}}
-    <p> It's {{data.currently.summary}} and the temperature is {{data.currently.apparentTemperature}} degrees</p>
-    <p> There is a {{data.currently.precipProbability}}% of rain and the nearest storm is {{data.currently.nearestStormDistance}} miles away</p>
-    </p>
-
-  </div>
-
-  <div class="item tabs tabs-secondary tabs-icon-left">
-    <a class="tab-item" href="#">
-      <i class="ion-ios-flower-outline"></i>
-      Detail
-    </a>
-    <a class="tab-item" ng-click="openModal()">
-      <i class="ion-ios-calendar-outline"></i>
-      Forecast
-    </a>
-  </div>
-
-</div>
-
-    <ion-nav-view name="modal"></ion-nav-view>
+  <!-- <div class="weatherBox">
+  <div class="device">
+      <section>
+        <div class="weather time-morning active">
+          <div class="icon">
+            <i class="sun"></i>
+          </div>
+          <div class="content">
+            <h3>Morning</h3>
+            <div class="degrees">- 1</div>   
+              <h2>Sunny</h2>
+              <div>Wind: E 7 mph</div>
+              <div>Humidity: 91%</div>
+           </div>
+        </div>
+        <div class="weather time-day">
+          <div class="icon">
+            <i class="sun"></i>
+            <i class="cloud windy"></i>
+          </div>
+          <div class="content">
+            <h3>Day</h3>
+            <div class="degrees">+ 3</div>
+            <div class="data">          
+              <h2>Mostly Sunny</h2>
+              <div>Wind: N 5 mph</div>
+              <div>Humidity: 45%</div>
+            </div>
+          </div>
+        </div>
+        <div class="weather time-evening">
+          <div class="icon">
+            <i class="sun"></i>
+            <i class="cloud"></i>
+            <i class="sprinkles"></i>
+            <i class="sprinkles"></i>
+            <i class="sprinkles"></i>
+            <i class="sprinkles"></i>
+          </div>
+          <div class="content">
+            <h3>Evening</h3>
+            <div class="degrees">0</div>
+            <div class="data">          
+              <h2>Rainy</h2>
+              <div>Wind: W 12 mph</div>
+              <div>Humidity: 91%</div>
+            </div>
+          </div>
+        </div>
+        <div class="weather time-night">
+          <div class="icon">
+            <i class="moon"></i>
+            <i class="cloud"></i>
+            <div class="snowflakes">
+              <i class="snowflake"></i>
+              <i class="snowflake"></i>
+              <i class="snowflake"></i>
+              <i class="snowflake"></i>
+            </div>
+          </div>
+          <div class="content">
+            <h3>Night</h3>
+            <div class="degrees">- 2</div>
+            <div class="data">          
+              <h2>Cloudy</h2>
+              <div>Wind: N 2 mph</div>
+              <div>Humidity: 47%</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div> -->
 
 
   </ion-content>
